@@ -1,0 +1,13 @@
+sudo: required
+language: bash
+dist: xenial
+services:
+  - docker
+
+script:
+  # build the Docker image using the Docker tool, osc cannot be easily used in Travis
+  - cd package
+  - docker build -t libyui-test-image -f Dockerfile .
+  # check the Travis script
+  - docker run -it --rm libyui-test-image shellcheck /usr/local/bin/libyui-travis
+
