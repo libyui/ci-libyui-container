@@ -20,7 +20,7 @@ The resulting docker image is available at https://registry.opensuse.org/.
 
 ## Triggering a Rebuild Manually
 
-If for some reason the automatic rebuild do not work or it failed you can
+If for some reason the automatic rebuild does not work or it failed you can
 trigger the rebuild in the OBS just like for the other regular packages.
 
 
