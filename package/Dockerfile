@@ -25,12 +25,10 @@ RUN zypper --non-interactive install --no-recommends \
   fontconfig-devel \
   gcc-c++ \
   git \
-  gtk3-devel \
   lcov \
   jsoncpp-devel \
   libmicrohttpd-devel \
   libyui-devel \
-  libyui-gtk-devel \
   libyui-ncurses-devel \
   libyui-qt-devel \
   libyui-rest-api-devel \
