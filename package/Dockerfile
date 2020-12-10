@@ -25,6 +25,7 @@ RUN zypper --non-interactive install --no-recommends \
   fontconfig-devel \
   gcc-c++ \
   git \
+  graphviz \
   lcov \
   jsoncpp-devel \
   libmicrohttpd-devel \
