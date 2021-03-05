@@ -27,6 +27,10 @@ RUN zypper --non-interactive install --no-recommends \
   git \
   graphviz \
   lcov \
+  swig \
+  python-devel \
+  ruby-devel \
+  graphviz-devel \
   jsoncpp-devel \
   libmicrohttpd-devel \
   libyui-devel \
