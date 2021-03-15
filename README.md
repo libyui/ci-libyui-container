@@ -1,9 +1,10 @@
 # The Libyui Testing Image
 
-[![Build Status](https://travis-ci.org/libyui/ci-libyui-container.svg?branch=master)](https://travis-ci.org/libyui/ci-libyui-container)
+[![Workflow Status](https://github.com/libyui/libyui/workflows/CI/badge.svg?branch=master)](
+https://github.com/libyui/libyui/actions?query=branch%3Amaster)
 
 This git repository contains the configuration used to build the docker
-image used for [TravisCI](https://travis-ci.org/).
+image used for CI tests in [Libyui GitHub Actions](https://github.com/libyui/libyui/actions).
 The resulting docker image is available at https://registry.opensuse.org/.
 
 ## Automatic Rebuilds
@@ -28,58 +29,6 @@ trigger the rebuild in the OBS just like for the other regular packages.
 
 This image is based on the latest openSUSE Tumbleweed image, additionally
 it contains the packages needed for building and running tests in libyui packages.
-[Examples](#examples) section below.
-
-## Using the Image in the Other Projects
-
-The image contains the `libyui-travis` script which runs all the checks and tests.
-
-The workflow is:
-
-- Copy the sources into the `/usr/src/app` directory.
-- If the code needs additional packages install them using the `zypper install`
-  command from the local `Dockerfile`. If the package can be used by more modules
-  you can add it into the base Docker image here.
-- Run the `libyui-travis` script.
-
-## Examples
-
-### `Dockerfile` example
-
-```Dockerfile
-FROM registry.opensuse.org/devel/libraries/libyui/containers/libyui-devel
-
-# optionally install additional packages if needed:
-# RUN zypper --non-interactive install --no-recommends \
-#  foo-devel \
-#  bar-devel
-
-# copy the sources into the image
-COPY . /usr/src/app
-```
-
-### `.travis.yml` Example
-
-```yaml
-sudo: required
-language: bash
-services:
-  - docker
-
-before_install:
-  - docker build -t libyui-foo-image .
-  # list the installed packages (just for easier debugging)
-  - docker run --rm -it libyui-foo-image rpm -qa | sort
-
-script:
-  # the "libyui-travis" script is included in the Docker image
-  # see https://github.com/libyui/ci-libyui-container/blob/master/package/libyui-travis
-  - docker run -it --rm -e TRAVIS=1 -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" libyui-foo-image libyui-travis
-```
-
-(Replace `foo` with your package name to avoid collisions with the other packages
-when running the same commands locally.)
-
 
 ## Building the Image Locally
 
@@ -111,7 +60,4 @@ the OBS build environment.
 
 :information_source:️ You should prefer using the `osc` method if possible, use the `docker`
 build only as a fallback when the `osc` build is not possible or does not work in your environment.
-
-```sh
-docker build -t ci-libyui-container-test -f package/Dockerfile package/
-```
+Use the [`ci-test`](ci-test) script for building.
