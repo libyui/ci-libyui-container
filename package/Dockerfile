@@ -2,9 +2,9 @@
 #!BuildTag: libyui-devel
 
 # NOTE: when building in OBS it actually is this image:
-# https://build.opensuse.org/package/show/devel:libraries:libyui/opensuse-15_3-image:docker
+# https://build.opensuse.org/package/show/devel:libraries:libyui/opensuse-tumbleweed-image
 # not the Docker hub image!!
-FROM opensuse/leap:15.3
+FROM opensuse/tumbleweed
 
 # do not install the files marked as documentation (use "rpm --excludedocs")
 RUN sed -i -e "s/^.*rpm.install.excludedocs.*/rpm.install.excludedocs = yes/" /etc/zypp/zypp.conf
@@ -14,7 +14,7 @@ COPY devel:libraries:libyui.pub /usr/share/gpg-keys/
 RUN rpm --import /usr/share/gpg-keys/devel:libraries:libyui.pub
 
 # Add the libyui repository
-RUN zypper ar -f http://download.opensuse.org/repositories/devel:/libraries:/libyui/openSUSE_Leap_15.3/ libyui
+RUN zypper ar -f http://download.opensuse.org/repositories/devel:/libraries:/libyui/openSUSE_Tumbleweed/ libyui
 
 RUN zypper --non-interactive install --no-recommends \
   boost-devel \
