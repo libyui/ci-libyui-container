@@ -1,0 +1,17 @@
+#! /bin/sh
+
+set -x -e
+
+# make sure the patched file is restored at exit or when aborted
+trap "mv package/Dockerfile.bak package/Dockerfile" EXIT
+
+# when we build the image in OBS the FROM actually refers to the OBS image,
+# if we want to use the same image at GitHub build we need to patch the Dockerfile
+sed -i.bak -e 's@^FROM .*$@FROM registry.opensuse.org/devel/libraries/libyui/images/opensuse/tumbleweed@' package/Dockerfile
+
+# build the Docker image
+docker build -t libyui-test -f package/Dockerfile package/
+
+# check the Travis script
+# FIXME: temporarily disabled because of the problems with glibc-2.33
+# docker run --rm libyui-test shellcheck /usr/local/bin/libyui-ci
