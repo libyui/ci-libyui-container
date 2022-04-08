@@ -19,7 +19,6 @@ RUN zypper ar -f http://download.opensuse.org/repositories/devel:/libraries:/lib
 RUN zypper --non-interactive install --no-recommends \
   boost-devel \
   brp-check-suse \
-  brp-extract-appdata \
   cmake \
   doxygen \
   fontconfig-devel \
