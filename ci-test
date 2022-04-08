@@ -7,7 +7,7 @@ trap "mv package/Dockerfile.bak package/Dockerfile" EXIT
 
 # when we build the image in OBS the FROM actually refers to the OBS image,
 # if we want to use the same image at GitHub build we need to patch the Dockerfile
-sed -i.bak -e 's@^FROM .*$@FROM registry.opensuse.org/devel/libraries/libyui/images/opensuse/tumbleweed@' package/Dockerfile
+sed -i.bak -e 's@^FROM .*$@FROM registry.opensuse.org/yast/head/images/opensuse/tumbleweed@' package/Dockerfile
 
 # build the Docker image
 docker build -t libyui-test -f package/Dockerfile package/
